@@ -10,7 +10,7 @@ class Organism:
         self.alleles = als
     
     def __repr__(self) -> str:
-        return f"{''.join(self.alleles)}"
+        return ''.join(self.alleles)
     
     def __mul__(self, other):
         possible_offspring = []
