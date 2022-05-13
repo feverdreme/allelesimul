@@ -5,11 +5,6 @@ PARENT_SIZE: int = 4
 GENERATIONS: int = 3
 KNOWN_GENES: str = "AB"
 
-def random_allele(gene: str, times: int = 1):
-    possible_genes = (gene, gene.upper())
-    
-    return [random.choice(possible_genes) for _ in range(times)]
-
 class Generation:
     population: list[Organism]
 
@@ -18,6 +13,15 @@ class Generation:
 
     def add_organism(self, org):
         self.population.append(org)
+
+    def breed(self):
+        next_generation = []
+
+        for o1 in gens[-1].population:
+            for o2 in gens[-1].population:
+                next_generation.append(o1 * o2)
+
+        return Generation(next_generation)
     
     # def stats(self):
     #     judged = list(map(Organism.is_red, self.population))
@@ -33,13 +37,7 @@ for _ in range(PARENT_SIZE):
 gens: list[Generation] = [P]
 
 for _ in range(GENERATIONS):
-    current_generation = []
-
-    for o1 in gens[-1].population:
-        for o2 in gens[-1].population:
-            current_generation.append(o1 * o2)
-    
-    gens.append(Generation(current_generation))
+    gens.append(gens[-1].breed())
 
 for g in gens:
     print(g.population)
