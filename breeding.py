@@ -1,5 +1,5 @@
 import random
-from organism import Organism
+from organism import Organism, Genome
 
 PARENT_SIZE: int = 4
 GENERATIONS: int = 3
@@ -19,16 +19,16 @@ class Generation:
     def add_organism(self, org):
         self.population.append(org)
     
-    def stats(self):
-        judged = list(map(Organism.is_red, self.population))
-        return {
-            "#Red": judged.count(True),
-            "#Yellow": judged.count(False)
-        }
+    # def stats(self):
+    #     judged = list(map(Organism.is_red, self.population))
+    #     return {
+    #         "#Red": judged.count(True),
+    #         "#Yellow": judged.count(False)
+    #     }
 
 P = Generation()
 for _ in range(PARENT_SIZE):
-    P.add_organism(Organism(random_allele('a', 2)))
+    P.add_organism(Organism(['Aa', 'Bb']))
 
 gens: list[Generation] = [P]
 
@@ -42,4 +42,4 @@ for _ in range(GENERATIONS):
     gens.append(Generation(current_generation))
 
 for g in gens:
-    print(g.stats())
+    print(g.population)
