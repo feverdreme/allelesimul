@@ -1,38 +1,19 @@
-import random as rand
+import random
+from organism import Organism
 
 PARENT_SIZE: int = 4
-GENERATIONS: int = 5
+GENERATIONS: int = 3
 
-class Organism:
-    alleles: tuple[str, str]
-
-    def __init__(self, *als):
-        self.alleles = als
+def random_allele(gene: str, times: int = 1):
+    possible_genes = (gene, gene.upper())
     
-    def __repr__(self) -> str:
-        return ''.join(self.alleles)
-    
-    def __mul__(self, other):
-        possible_offspring = []
-
-        for i in range(2):
-            for j in range(2):
-                possible_offspring.append((self.alleles[i], other.alleles[j]))
-        
-        return Organism(*rand.choice(possible_offspring))
-    
-    def self_is_red(self) -> bool:
-        return 'A' in self.alleles
-    
-    @staticmethod
-    def is_red(org) -> bool:
-        return org.self_is_red()
+    return [random.choice(possible_genes) for _ in range(times)]
 
 class Generation:
     population: list[Organism]
 
-    def __init__(self, pop = []):
-        self.population = pop
+    def __init__(self, population = []):
+        self.population = population
 
     def add_organism(self, org):
         self.population.append(org)
@@ -46,13 +27,9 @@ class Generation:
 
 P = Generation()
 for _ in range(PARENT_SIZE):
-    P.add_organism(Organism(
-        rand.choice(('A', 'a')),
-        rand.choice(('A', 'a'))
-    ))
+    P.add_organism(Organism(random_allele('a', 2)))
 
-gens: list[Generation] = []
-gens.append(P)
+gens: list[Generation] = [P]
 
 for _ in range(GENERATIONS):
     current_generation = []
