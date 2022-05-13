@@ -3,6 +3,7 @@ from organism import Organism
 
 PARENT_SIZE: int = 4
 GENERATIONS: int = 3
+KNOWN_GENES: str = "AB"
 
 def random_allele(gene: str, times: int = 1):
     possible_genes = (gene, gene.upper())

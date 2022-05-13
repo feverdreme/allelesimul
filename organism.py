@@ -1,5 +1,10 @@
 import random
 
+allele_t = tuple[str, str]
+
+class Genome:
+    genes: list[allele_t]
+
 class Organism:
     alleles: tuple[str, str]
 
@@ -9,7 +14,6 @@ class Organism:
     def __repr__(self) -> str:
         return ''.join(self.alleles)
 
-    # crossing over
     def __mul__(self, other):
         possible_offspring = []
 
