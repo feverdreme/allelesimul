@@ -41,8 +41,6 @@ def setDominance():
         red["allele"] = ["AA", "Aa", "aA"]
         
         yellow["allele"] = ["aa"]   
-    
-    print(yellow["allele"], red["allele"])
 
 
 #setFitness and setDominance should be run at the begining of every simulation and run only once
